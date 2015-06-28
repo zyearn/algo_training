@@ -18,9 +18,9 @@ public:
             return ans;
 
         st.push(root);
+        TreeNode *cur;
         while (!st.empty()){
-            TreeNode *cur = st.top();
-            st.pop();
+            rur = st.top(); st.pop();
 
             if (mapcount[cur] == 0)
             {
