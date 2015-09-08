@@ -68,7 +68,7 @@ void print_vector(const vector<int> &v) {
 
 int main(int argc, char **argv) {
     if (argc < 3) {
-        cout << "argu";
+        cout << "argu n k";
         return -1;
     }
 
