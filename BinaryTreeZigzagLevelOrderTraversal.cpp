@@ -9,7 +9,7 @@
  */
 class Solution {
 public:
-    vector<vector<int>> levelOrder(TreeNode* root) {
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
         vector<vector<int>> res;
         if (root == NULL) {
             return res;
@@ -43,6 +43,9 @@ public:
             vCur.push_back(cur->val);
         }
 
+        for (int i=1; i<res.size(); i=i+2) {
+            reverse(res[i].begin(), res[i].end());
+        }
         return res;
     }
 };
