@@ -9,25 +9,21 @@
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
-        if (!root)
-            return;
+        if (!root) return;
 
-        auto parent = root, child = root->left;
-        
-        while (child) {
-            auto back = child;
+        TreeLinkNode *pL = root->left;
+        TreeLinkNode *pR = root->right;
 
-            while (child) {
-                child->next = parent->right;
-                child = child->next;
-                parent = parent->next;
-                child->next = parent?parent->left:NULL;
-                child = child->next;
-            }
+        while (pL && pR) {
+            pL->next = pR;
 
-            parent = back;
-            child = parent->left;
+            pL = pL->right;
+            pR = pR->left;
         }
+
+        connect(root->left);
+        connect(root->right);
         
+        return;
     }
 };

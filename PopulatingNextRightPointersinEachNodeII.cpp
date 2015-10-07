@@ -12,33 +12,25 @@ public:
         if (root == NULL)
             return;
 
-        queue<TreeLinkNode *> qtmp;
-        queue<TreeLinkNode *> qcur;
-        TreeLinkNode *ptmp;
+        queue<TreeLinkNode *> q;
+        q.push(root);
+        q.push(NULL);
 
-        qcur.push(root);
-        while(1) {
-            while (!qcur.empty()) {
-                ptmp = qcur.front();
-                qcur.pop();
+        TreeLinkNode *pCur;
+        while (!q.empty()) {
+            pCur = q.front();
+            q.pop();
 
-                if (ptmp->left) qtmp.push(ptmp->left);
-                if (ptmp->right) qtmp.push(ptmp->right);
+            if (pCur == NULL) {
+                if (q.size() > 0) q.push(NULL);
+            } else {
+                pCur->next = q.front();
 
-                if (qcur.size() > 0) {
-                    ptmp->next = qcur.front();
-                } else {
-                    ptmp->next = NULL;
-                }
+                if (pCur->left) q.push(pCur->left);
+                if (pCur->right) q.push(pCur->right);
             }
-
-            if (qtmp.size() == 0) {
-                break;
-            }
-
-            qtmp.swap(qcur);
         }
-        
+
         return;
     }
 };
