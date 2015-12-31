@@ -1,23 +1,46 @@
+#include <iostream>
+#include <cinttypes>
+using namespace std;
+
 class Solution {
 public:
+    // calculate mCn
     int C(int m, int n) {
-        // calculate mCn
-        n = (m-n < n) ? n:(m-n);
-
-        // use long long in case of overflow
-        long long sum = 1;
-        for (int i=0, _m=m; i<m-n; _m--, i++) {
-            sum *= _m;
+        if (m < 0 || n < 0 || n > m) {
+            return 0;
         }
 
-        for (int _n=m-n; _n>1; _n--) {
-            sum /= _n;
-        }
+        n = (n < (m-n)) ? n : (m-n);
 
+        uint64_t sum = 1;
+        for (int i=0; i<n; i++) {
+            sum *= m;
+            m--;
+        }
+        
+        for (int i=n; i>0; i--) {
+            sum /= i;
+        }
+        
         return sum;
     }
 
     int uniquePaths(int m, int n) {
-        return C(m+n-2, m-1);
+        m = m - 1;
+        n = n - 1;
+
+        if (m < 0 || n < 0) {
+            return 0;
+        }
+
+        int s = m + n;
+        return C(s, m);
     }
 };
+
+int main() {
+    Solution s;
+    s.uniquePaths(10, 10);
+    
+    return 0;
+}
