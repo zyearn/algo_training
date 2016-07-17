@@ -7,6 +7,7 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+/*
 #include <iostream>
 #include <map>
 #include <utility>
@@ -71,3 +72,26 @@ public:
 int main() {
     return 0;
 }
+*/
+
+
+class Solution {
+public:
+    //lowestCommonAncestor表示在root为根的二叉树中，若p、q存在于该树种，那么返回p、q的LCA
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if (root == p || root == q || root == NULL) {
+            return root;
+        }
+           
+        TreeNode *left = lowestCommonAncestor(root->left, p, q);
+        TreeNode *right = lowestCommonAncestor(root->right, p, q);
+
+        if (left && right) {
+            return root;
+        } else if (left) {
+            return left;
+        } else {
+            return right;
+        }
+    }
+};
